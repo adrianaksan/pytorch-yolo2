@@ -10,6 +10,7 @@ import cPickle
 import numpy as np
 
 def parse_rec(filename):
+
     """ Parse a PASCAL VOC xml file """
     tree = ET.parse(filename)
     objects = []
@@ -94,6 +95,7 @@ def voc_eval(detpath,
     # cachedir caches the annotations in a pickle file
 
     # first load gt
+    # print cachedir
     if not os.path.isdir(cachedir):
         os.mkdir(cachedir)
     cachefile = os.path.join(cachedir, 'annots.pkl')
@@ -202,7 +204,7 @@ def voc_eval(detpath,
 
 
 def _do_python_eval(res_prefix, output_dir = 'output'):
-    _devkit_path = '/data/xiaohang/pytorch-yolo2/VOCdevkit'
+    _devkit_path = os.path.abspath('VOCdevkit')
     _year = '2007'
     _classes = ('__background__', # always index 0
         'aeroplane', 'bicycle', 'bird', 'boat',
